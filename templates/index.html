@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriVision: AI Crop Disease Detection</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel">
+            <div class="logo">
+                <h1>Agri<span>Vision</span></h1>
+                <p>AI Crop Insights</p>
+            </div>
+            <nav>
+                <ul id="sidebar-nav">
+                    <li class="active"><a href="#" id="nav-dashboard">Dashboard</a></li>
+                    <li><a href="#stats" id="nav-stats">Model Stats</a></li>
+                    <li><a href="#history" id="nav-history">Upload History</a></li>
+                    <li><a href="#guides" id="nav-guides">Plant Guides</a></li>
+                    <li><a href="#about" id="nav-about">About</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p style="font-weight: 600; color: var(--text-main); margin-bottom: 5px;">Team AgriVision</p>
+                <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
+                    <p style="font-size: 0.7rem; color: var(--text-muted); opacity: 0.8; line-height: 1.4;">
+                        SEM VI AI Lab Project<br>
+                        Powered by EfficientNetB3
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>Crop Disease Analyzer</h2>
+                    <p>Upload a clear crop leaf image for immediate AI biological analysis.</p>
+                </div>
+                <button id="theme-toggle" class="theme-switch" title="Toggle Theme">
+                    <span class="switch-icon" id="theme-icon">☀️</span>
+                </button>
+            </header>
+
+            <div class="analyzer-grid" id="dashboard-view">
+                <!-- Upload Section -->
+                <section class="upload-section glass-panel">
+                    <h3>Leaf Image Upload</h3>
+                    <div class="upload-area" id="drop-zone">
+                        <input type="file" id="file-input" accept="image/*" hidden />
+                        <div class="upload-placeholder">
+                            <span class="icon">🌿</span>
+                            <p>Drag & Drop an image here or</p>
+                            <button class="btn btn-primary" id="browse-btn">Browse Files</button>
+                        </div>
+                        <img id="image-preview" src="" alt="Image Preview" style="display: none;" />
+                    </div>
+                    <div class="action-buttons" style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn btn-primary action-btn" id="change-btn"
+                            style="display: none; flex: 1;">Change Image</button>
+                        <button class="btn btn-success action-btn" id="analyze-btn" disabled style="flex: 1;">Analyze
+                            Crop</button>
+                    </div>
+                    <!-- Loading Spinner -->
+                    <div id="loading" class="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Processing via EfficientNetB3...</p>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="results-section glass-panel">
+                    <h3>Analysis Report</h3>
+                    <div id="empty-state" class="empty-state">
+                        <p>No analysis performed yet. Upload an image to begin.</p>
+                    </div>
+
+                    <div id="result-content" class="result-content" style="display: none;">
+                        <div class="result-header">
+                            <h4 id="disease-name" class="disease-name">Disease Name</h4>
+                            <div class="confidence-badge">
+                                <span id="confidence-val">0%</span> Confidence
+                            </div>
+                        </div>
+
+                        <div class="info-card description-card">
+                            <h5>Description</h5>
+                            <p id="disease-desc">Description will appear here...</p>
+                        </div>
+
+                        <div class="info-card treatment-card">
+                            <h5>Recommended Action</h5>
+                            <p id="disease-treatment">Treatment will appear here...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Visualizations Dashboard -->
+            <section class="visuals-section" id="stats-view" style="display: none;">
+                <h3 class="section-title">Model Diagnostics</h3>
+                <div class="visuals-grid">
+                    <div class="visual-card glass-panel">
+                        <h4>Model Accuracy Comparison</h4>
+                        <p class="subtitle">Validation accuracy of evaluated models.</p>
+                        <img src="{{ url_for('static', filename='visualizations/model_comparison.png') }}"
+                            alt="Model Comparison" style="width: 100%; border-radius: 8px; margin-top: 15px;">
+                    </div>
+                    <div class="visual-card glass-panel">
+                        <h4>Class Distribution</h4>
+                        <p class="subtitle">Number of images per disease class in the dataset.</p>
+                        <img src="{{ url_for('static', filename='visualizations/class_distribution.png') }}"
+                            alt="Class Distribution" style="width: 100%; border-radius: 8px; margin-top: 15px;">
+                    </div>
+                    <div class="visual-card glass-panel" style="grid-column: 1 / -1;">
+                        <h4>Performance and Overfitting Analysis of MobileNet-Based Plant Disease Detection Model</h4>
+                        <p class="subtitle">Training vs Validation Accuracy and Loss across epochs.</p>
+                        <img src="{{ url_for('static', filename='visualizations/overfitting_analysis.png') }}"
+                            alt="Overfitting Analysis" style="width: 100%; border-radius: 8px; margin-top: 15px;">
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                            <strong>How to read this graph:</strong> If Training curves are significantly better than
+                            Validation curves, the model is <em>overfitting</em>. If both are poor, it is
+                            <em>underfitting</em>. If they move closely together and reach a high accuracy, it is a
+                            <em>good fit</em>!
+                        </p>
+                    </div>
+                    <div class="visual-card glass-panel" style="grid-column: 1 / -1;">
+                        <h4>Confusion Matrix Map</h4>
+                        <p class="subtitle">Visual representation of class predictive accuracy for EfficientNetB3.</p>
+                        <img src="{{ url_for('static', filename='visualizations/confusion_matrix_model_mobilenet.png') }}"
+                            alt="Confusion Matrix" style="width: 100%; border-radius: 8px; margin-top: 15px;">
+                    </div>
+                </div>
+            </section>
+            <!-- Upload History Dashboard -->
+            <section class="history-section" id="history-view" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 class="section-title" style="margin-bottom: 0;">Analysis History</h3>
+                    <button id="clear-history-btn" class="btn btn-primary"
+                        style="background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); font-size: 0.9rem; padding: 0.5rem 1rem;">🗑️
+                        Clear History</button>
+                </div>
+                <div class="history-container glass-panel" style="padding: 2rem;">
+                    <div id="history-list">
+                        <div class="empty-state">
+                            <p>No past analyses found. Your history will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plant Guides View -->
+            <section class="guides-section" id="guides-view" style="display: none;">
+                <h3 class="section-title">Plant Care & Disease Encyclopedia</h3>
+                <div class="search-bar" style="margin-bottom: 1.5rem;">
+                    <input type="text" id="guide-search" placeholder="Search crops or diseases..." class="glass-panel"
+                        style="width: 100%; padding: 1rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main);">
+                </div>
+                <div id="crop-filters" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem;">
+                    <button class="filter-btn active" data-crop="all">All Crops</button>
+                    <!-- Crop buttons will be injected here -->
+                </div>
+                <div id="guides-container" class="visuals-grid">
+                    <!-- Guides will be injected here -->
+                </div>
+            </section>
+
+            <!-- About View -->
+            <section class="about-section" id="about-view" style="display: none;">
+                <h3 class="section-title">About AgriVision AI</h3>
+                <div class="glass-panel" style="padding: 3rem; overflow: hidden; position: relative;">
+                    <!-- Background Decoration -->
+                    <div
+                        style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--primary); filter: blur(100px); opacity: 0.1; pointer-events: none;">
+                    </div>
+
+                    <div style="max-width: 800px;">
+                        <h4 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1.5rem;">The Future of
+                            Digital Agriculture</h4>
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; color: var(--text-main);">
+                            AgriVision is an intelligent crop diagnostic ecosystem developed to bridge the gap between
+                            complex plant pathology and everyday farming. By leveraging cutting-edge Deep Learning, we
+                            provide farmers with immediate, actionable insights to protect their yields and ensure food
+                            security.
+                        </p>
+
+                        <!-- AI Pipeline Dataflow -->
+                        <h5
+                            style="margin-bottom: 1.5rem; font-size: 1.1rem; border-left: 3px solid var(--primary); padding-left: 15px;">
+                            AI Analysis Pipeline</h5>
+                        <div
+                            style="display: flex; justify-content: space-between; gap: 10px; margin-bottom: 3rem; background: var(--card-bg-light); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--card-border-light); overflow-x: auto;">
+                            <div style="text-align: center; min-width: 100px;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: white;">
+                                    1</div>
+                                <p style="font-size: 0.75rem; font-weight: 600;">Image Upload</p>
+                                <p style="font-size: 0.65rem; color: var(--text-muted);">User Input</p>
+                            </div>
+                            <div style="display: flex; align-items: center; color: var(--text-muted); opacity: 0.5;">→
+                            </div>
+                            <div style="text-align: center; min-width: 100px;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: white;">
+                                    2</div>
+                                <p style="font-size: 0.75rem; font-weight: 600;">Preprocessing</p>
+                                <p style="font-size: 0.65rem; color: var(--text-muted);">224x224 RGB</p>
+                            </div>
+                            <div style="display: flex; align-items: center; color: var(--text-muted); opacity: 0.5;">→
+                            </div>
+                            <div style="text-align: center; min-width: 100px;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: white;">
+                                    3</div>
+                                <p style="font-size: 0.75rem; font-weight: 600;">EfficientNetB3</p>
+                                <p style="font-size: 0.65rem; color: var(--text-muted);">Feature Map</p>
+                            </div>
+                            <div style="display: flex; align-items: center; color: var(--text-muted); opacity: 0.5;">→
+                            </div>
+                            <div style="text-align: center; min-width: 100px;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: white;">
+                                    4</div>
+                                <p style="font-size: 0.75rem; font-weight: 600;">Classification</p>
+                                <p style="font-size: 0.65rem; color: var(--text-muted);">88 Classes</p>
+                            </div>
+                            <div style="display: flex; align-items: center; color: var(--text-muted); opacity: 0.5;">→
+                            </div>
+                            <div style="text-align: center; min-width: 100px;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: white;">
+                                    5</div>
+                                <p style="font-size: 0.75rem; font-weight: 600;">Diagnosis</p>
+                                <p style="font-size: 0.65rem; color: var(--text-muted);">Final Results</p>
+                            </div>
+                        </div>
+
+                        <div class="analyzer-grid"
+                            style="grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                            <div
+                                style="background: var(--card-bg-light); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border-light);">
+                                <h5 style="color: var(--primary); margin-bottom: 10px;">Our Mission</h5>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);">To democratize agricultural
+                                    expertise by putting a high-accuracy laboratory in every farmer's pocket.</p>
+                            </div>
+                            <div
+                                style="background: var(--card-bg-light); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border-light);">
+                                <h5 style="color: var(--primary); margin-bottom: 10px;">The Dataset</h5>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);">Trained on the
+                                    <strong>Plant Disease Classification Merged Dataset</strong> dataset, containing
+                                    over 76,000+ curated images across
+                                    88 health categories.
+                                </p>
+                            </div>
+                        </div>
+
+                        <h5
+                            style="margin-bottom: 1.5rem; font-size: 1.1rem; border-left: 3px solid var(--primary); padding-left: 15px;">
+                            Project Methodology & Evolution</h5>
+                        <div class="analyzer-grid"
+                            style="grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                            <div
+                                style="background: var(--card-bg-light); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border-light);">
+                                <h5 style="color: var(--primary); margin-bottom: 10px;">Data Preprocessing</h5>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);">Every image undergoes automated
+                                    resizing to 224x224 pixels and pixel normalization. We employed advanced data
+                                    augmentation
+                                    (flips, rotations) to ensure accuracy across all lighting conditions.</p>
+                            </div>
+                            <div
+                                style="background: var(--card-bg-light); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border-light);">
+                                <h5 style="color: var(--primary); margin-bottom: 10px;">Future Scope</h5>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);">Our next steps involve
+                                    integrating
+                                    real-time field sensing, IoT irrigation control, and expanding the model to
+                                    recognize
+                                    nutrient deficiencies in addition to diseases.</p>
+                            </div>
+                        </div>
+
+                        <h5
+                            style="margin-bottom: 1.5rem; font-size: 1.1rem; border-left: 3px solid var(--primary); padding-left: 15px;">
+                            Technical Specifications</h5>
+                        <div class="info-card"
+                            style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1); padding: 2rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                                <div>
+                                    <strong style="display: block; color: var(--text-main); margin-bottom: 5px;">
+                                        Neural Architecture
+                                    </strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                        EfficientNetB3 utilizing "Compound Scaling" to balance depth, width, and
+                                        resolution.
+                                        Leverages ImageNet-1K pre-trained weights for advanced feature extraction in
+                                        botanical pathology.
+                                    </p>
+                                </div>
+                                <div>
+                                    <strong style="display: block; color: var(--text-main); margin-bottom: 5px;">
+                                        Analysis Pipeline
+                                    </strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                        Integrated <strong>Flask-PyTorch</strong> backend with 224x224 RGB tensor
+                                        normalization
+                                        and Softmax-based multi-class probability distribution across 88 categories.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                            <h5
+                                style="color: var(--text-main); margin-bottom: 1.5rem; font-size: 1rem; text-align: center;">
+                                Project Development Team</h5>
+                            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                                <div style="text-align: center;">
+                                    <p style="font-weight: 600; color: var(--primary);">Dilip Prajapati</p>
+                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Lead Developer</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="font-weight: 600; color: var(--primary);">Hritik Makwana</p>
+                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Research & Data</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="font-weight: 600; color: var(--primary);">Bikendra Sharma</p>
+                                    <p style="font-size: 0.75rem; color: var(--text-muted);">Documentation</p>
+                                </div>
+                            </div>
+                            <p
+                                style="margin-top: 3rem; font-size: 0.8rem; color: var(--text-muted); text-align: center; opacity: 0.6;">
+                                SEM VI AI Lab Project &copy; 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="custom-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-panel">
+            <h3 style="margin-bottom: 1rem;">Delete History?</h3>
+            <p id="modal-message" style="margin-bottom: 2rem; color: var(--text-muted);">Are you sure you want to delete
+                all your past analysis results? This action cannot be undone.</p>
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <button id="modal-cancel" class="btn btn-primary"
+                    style="background: rgba(255, 255, 255, 0.1);">Cancel</button>
+                <button id="modal-confirm" class="btn btn-success"
+                    style="width: auto; background: var(--danger); border: none;">Yes, Delete All</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>

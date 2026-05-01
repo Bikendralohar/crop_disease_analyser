@@ -1,0 +1,154 @@
+{
+    "Apple___Apple_scab": {
+        "description": "Apple scab is a disease caused by the fungus Venturia inaequalis, causing dark, scabby lesions.",
+        "treatment": "Remove infected leaves and dropped fruit. Apply protective fungicides like captan or sulfur in early spring."
+    },
+    "Apple___Black_rot": {
+        "description": "Black rot is caused by a fungus and appears as light brown spots on leaves or rotting fruit.",
+        "treatment": "Prune out dead or diseased wood. Implement a fungicide spray program containing myclobutanil or captan."
+    },
+    "Apple___Cedar_apple_rust": {
+        "description": "A fungal disease causing yellow-orange spots on leaves.",
+        "treatment": "Remove nearby cedar hosts. Use preventative fungicides like myclobutanil before spores spread in spring."
+    },
+    "Apple___healthy": {
+        "description": "The apple leaf is healthy.",
+        "treatment": "Maintain regular watering and fertilization schedules."
+    },
+    "Blueberry___healthy": {
+        "description": "The blueberry leaf is healthy.",
+        "treatment": "Ensure soil acidity remains optimal and maintain watering routines."
+    },
+    "Cherry_(including_sour)___Powdery_mildew": {
+        "description": "A fungal disease creating white, powdery fungal growth on leaves.",
+        "treatment": "Ensure good air circulation. Spray with sulfur or neem oil early in the season."
+    },
+    "Cherry_(including_sour)___healthy": {
+        "description": "The cherry leaf is healthy.",
+        "treatment": "Maintain regular watering and fertilization schedules."
+    },
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+        "description": "Fungal disease causing rectangular, gray-to-tan lesions on corn leaves.",
+        "treatment": "Use disease-resistant hybrids and practice crop rotation. Consider fungicide application if severe."
+    },
+    "Corn_(maize)___Common_rust_": {
+        "description": "A fungus resulting in small, rusty red-brown pustules on leaves.",
+        "treatment": "Plant rust-resistant corn varieties. Fungicides can help if applied at early signs."
+    },
+    "Corn_(maize)___Northern_Leaf_Blight": {
+        "description": "Fungal disease causing cigar-shaped gray-green lesions.",
+        "treatment": "Tillage to bury residue and crop rotation. Use resistant corn hybrids."
+    },
+    "Corn_(maize)___healthy": {
+        "description": "The corn leaf is healthy.",
+        "treatment": "Maintain regular field management."
+    },
+    "Grape___Black_rot": {
+        "description": "Shows as small, light brown circular spots on leaves or black rotting berries.",
+        "treatment": "Prune off infected canes. Employ proper canopy management for airflow and apply preventative fungicides."
+    },
+    "Grape___Esca_(Black_Measles)": {
+        "description": "Also known as Black Measles, caused by a complex of fungi resulting in necrotic leaf striping.",
+        "treatment": "Remove and burn infected vines or cordons. Trunk renewal is often necessary."
+    },
+    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
+        "description": "Fungal disease causing browning and drying of leaves.",
+        "treatment": "Apply copper-based fungicides or mancozeb. Improve vineyard air circulation."
+    },
+    "Grape___healthy": {
+        "description": "The grape leaf is healthy.",
+        "treatment": "Maintain proper pruning and irrigation."
+    },
+    "Orange___Haunglongbing_(Citrus_greening)": {
+        "description": "A devastating bacterial disease causing mottled leaves and misshapen, green fruit. Spread by the Asian citrus psyllid.",
+        "treatment": "No cure exists. Infected trees must be removed and destroyed to prevent spread. Control psyllid populations."
+    },
+    "Peach___Bacterial_spot": {
+        "description": "Bacterial disease causing angular, dark leaf spots which eventually fall out, creating a 'shot-hole' appearance.",
+        "treatment": "Plant resistant varieties. Copper and oxytetracycline sprays can provide some control."
+    },
+    "Peach___healthy": {
+        "description": "The peach leaf is healthy.",
+        "treatment": "Maintain regular field management."
+    },
+    "Pepper,_bell___Bacterial_spot": {
+        "description": "Bacteria causing dark, water-soaked spots on leaves and fruit.",
+        "treatment": "Use disease-free seeds and transplants. Apply copper sprays. Avoid overhead watering."
+    },
+    "Pepper,_bell___healthy": {
+        "description": "The bell pepper leaf is healthy.",
+        "treatment": "Maintain regular watering and fertilization schedules."
+    },
+    "Potato___Early_blight": {
+        "description": "Fungal disease causing 'bullseye' patterned lesions, usually on older leaves.",
+        "treatment": "Apply fungicides like chlorothalonil. Ensure proper crop rotation and avoid overhead watering."
+    },
+    "Potato___Late_blight": {
+        "description": "The aggressive devastating fungus responsible for the Irish Potato Famine. Causes fast-spreading irregular brown lesions.",
+        "treatment": "Requires immediate aggressive fungicide application (e.g., chlorothalonil, mancozeb). Destroy infected plants immediately."
+    },
+    "Potato___healthy": {
+        "description": "The potato leaf is healthy.",
+        "treatment": "Maintain preventative treatments."
+    },
+    "Raspberry___healthy": {
+        "description": "The raspberry leaf is healthy.",
+        "treatment": "Maintain regular pruning."
+    },
+    "Soybean___healthy": {
+        "description": "The soybean leaf is healthy.",
+        "treatment": "Maintain regular field management."
+    },
+    "Squash___Powdery_mildew": {
+        "description": "Fungus producing a white powdery growth over the surfaces of leaves.",
+        "treatment": "Improve air circulation. Apply sulfur-containing sprays or neem oil early."
+    },
+    "Strawberry___Leaf_scorch": {
+        "description": "Causes irregular dark purple spots on leaves that later cause them to brown and curl.",
+        "treatment": "Remove affected leaves. Make sure to rotate beds and apply fungicides preventatively."
+    },
+    "Strawberry___healthy": {
+        "description": "The strawberry leaf is healthy.",
+        "treatment": "Keep beds weeded and watered."
+    },
+    "Tomato___Bacterial_spot": {
+        "description": "Bacterial disease causing small, water-soaked spots on leaves.",
+        "treatment": "Use copper-based bactericides combined with mancozeb. Avoid overhead watering."
+    },
+    "Tomato___Early_blight": {
+        "description": "Fungal disease causing dark concentric ring spots on older leaves.",
+        "treatment": "Mulch the soil, remove infected lower leaves, and use preventative fungicides like chlorothalonil."
+    },
+    "Tomato___Late_blight": {
+        "description": "Severely damaging pathogen causing large, irregular dark, water-soaked spots.",
+        "treatment": "Immediately remove and destroy affected plants. Apply reliable fungicides preventatively before disease begins."
+    },
+    "Tomato___Leaf_Mold": {
+        "description": "Fungal disease starting as pale green spots on upper leaf surfaces and mold underneath.",
+        "treatment": "Increase air circulation, space plants out, and reduce greenhouse humidity. Use appropriate fungicides."
+    },
+    "Tomato___Septoria_leaf_spot": {
+        "description": "Fungus causing numerous small circular spots with dark borders and gray centers.",
+        "treatment": "Remove affected leaves heavily, mulch to prevent soil splashing, and apply protectant fungicidal sprays."
+    },
+    "Tomato___Spider_mites Two-spotted_spider_mite": {
+        "description": "Tiny pests causing stippling (tiny yellow dots) on leaves, often forming webbing.",
+        "treatment": "Spray plants with a strong stream of water. Use horticultural oils, insecticidal soaps, or specific miticides."
+    },
+    "Tomato___Target_Spot": {
+        "description": "Causes dark target-like, concentric ring lesions on leaves and deep fruit rot.",
+        "treatment": "Improve air circulation and use fungicides like chlorothalonil or mancozeb."
+    },
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+        "description": "Virus transmitted by whiteflies causing severe yellowing and upward curling of leaves.",
+        "treatment": "Control whitefly populations strongly. Plant resistant varieties. Remove infected plants entirely."
+    },
+    "Tomato___Tomato_mosaic_virus": {
+        "description": "Virus causing mottling, yellowing, and fern-like appearance of leaves.",
+        "treatment": "No cure. Remove infected plants. Disinfect hands and gardening tools thoroughly, as it is easily spread mechanically."
+    },
+    "Tomato___healthy": {
+        "description": "The tomato leaf is healthy.",
+        "treatment": "Maintain regular watering to the roots (not leaves) and support vines to keep them off the soil."
+    }
+}
